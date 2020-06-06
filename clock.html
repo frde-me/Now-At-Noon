@@ -1,0 +1,71 @@
+<body>
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <canvas id="clock" width="1080" height="720"></canvas>
+    <script>
+        var c = document.getElementById("clock")
+        var ctx = c.getContext("2d");
+        ctx.font = "90px Arial"
+
+        var counter = 0;
+
+        const {width, height} = ctx.canvas.getBoundingClientRect();
+        ctx.translate(width/2, height/2)
+
+        const radius = (height/2)-10;
+
+        function drawClock() {
+            counter = counter + 1;
+            
+            ctx.beginPath();
+            ctx.fillStyle = '#00909e'
+            ctx.arc(0, 0, radius, 0, 2*Math.PI)    
+            ctx.fill();
+
+
+            ctx.beginPath()
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "white"
+            ctx.arc(0, 0, radius-5, 0, 2*Math.PI)
+            ctx.stroke()
+            
+            ctx.beginPath()
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = 'green'
+            ctx.arc(0, 0, radius, 0, 2*Math.PI)
+            ctx.stroke()
+            
+            ctx.beginPath()
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = 'black'
+            ctx.arc(0, 0, radius, 0, 2*Math.PI)
+            ctx.stroke()
+            
+            ctx.strokeStyle = "WHITE"
+            ctx.lineWidth = 19;
+            
+            ctx.fillStyle = "WHITE"
+            ctx.font = ctx.font.replace(/\d+px/, "175px");
+            ctx.strokeText("NOW", -220, -120)
+            ctx.strokeText("AT", -110, 40)
+            ctx.strokeText("NOON", -260, 200)
+
+            ctx.fillStyle = "black"
+            var minuteAngle = ((counter % 360) / 360)* 2 * Math.PI;
+            ctx.rotate(minuteAngle)
+            ctx.fillRect(-5,-5,10, radius-20)
+            ctx.rotate(-minuteAngle)
+            
+            var hourAngle = Math.PI;
+            ctx.rotate(hourAngle)
+            ctx.fillRect(-10,-10,20, radius-100)
+            ctx.rotate(-hourAngle)
+
+            ctx.beginPath()
+            ctx.arc(0,0, 13, 0, 2*Math.PI)
+            ctx.fill()
+        }
+
+        setInterval(drawClock, 15)
+        drawClock();
+    </script>
+</body>

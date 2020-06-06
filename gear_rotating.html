@@ -1,0 +1,45 @@
+<body>
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <canvas id="clock" width="1080" height="720"></canvas>
+    <script>
+        var c = document.getElementById("clock")
+        var ctx = c.getContext("2d");
+        ctx.font = "90px Arial"
+
+        const {width, height} = ctx.canvas.getBoundingClientRect();
+        ctx.translate(width/2, height/2)
+        
+        var counter = 0;
+        var radius = (height/2) - 20
+
+        function drawClock() {
+            counter = counter + 1;
+
+            ctx.beginPath();
+            ctx.fillStyle = 'gray'
+            ctx.arc(0, 0, radius, 0, 2*Math.PI)    
+            ctx.fill();
+
+            var bigAngle = ((counter % (360*3))/(360*3)) * 2 * Math.PI
+            ctx.rotate(bigAngle)
+            
+            var count = 8;
+            for(var i = 0 ; i < count; i++) {
+                var angle = ((i/count))* 2 * Math.PI;
+                console.log(angle)
+                ctx.rotate(angle)
+                ctx.fillStyle = 'transparent'
+                ctx.clearRect(radius-90,-40, 200, 80)
+                ctx.fillStyle = 'black'
+                ctx.fillRect(radius-90,-40, 80, 20)
+                ctx.fillStyle = 'transparent'
+                ctx.clearRect(radius-90,-25, 200, 65)
+                ctx.rotate(-angle)
+            }
+
+            ctx.rotate(-bigAngle)
+        }
+        setInterval(drawClock, 10);
+        drawClock();
+    </script>
+</body>

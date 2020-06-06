@@ -1,0 +1,36 @@
+
+html, body {
+    background-color: transparent;
+    position: absolute;   
+}
+
+.box {
+    border: 4px solid #d2dcff;
+    border-radius: 4px;
+    box-shadow: 5px 5px 1px black;;
+}
+
+.infoPanel {
+    width: 400;
+    height: 700;
+    background-color: rgb(22, 43, 63);
+}
+
+.infoPanel {
+    color: white;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.camera {
+    width: 1000;
+    height: 700;
+    background-color: green;
+}
+
+iframe {
+    background-color: transparent;
+    border: none;
+    overflow: hidden;
+}
